@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+</head>
+
+<title>{% block title %}Analizador de Productos{% endblock %}</title>
+
+<body class="bg-white">
+    <h1 class="text-3xl mb-5 mt-6 text-center font-medium">Analizador de Productos</h1>
+    <div class="flex justify-center items-start flex-row mt-3 mb-6 p-4 gap-8 pr-16">
+        <form action="/" method="post" class="w-full max-w-md mb-6">
+            <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Ingrese los productos y precios</label>
+            <textarea id="message" name="entrada" rows="10" cols="50"
+                class="p-4 w-full text-black bg-gray-100 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 resize-none  font-mono"
+                placeholder="<producto> <precio>"></textarea>
+            <div class="flex justify-center mt-3">
+                <button class="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-16 rounded"
+                    type="submit">Analizar Productos</button>
+            </div>
+        </form>
+        <!-- Resultados -->
+        <div class="w-full max-w-md mb-6">
+            <table class="w-full border border-gray-300 mr-16">
+                <thead>
+                    <tr class="bg-blue-200">
+                        <th class="border border-gray-300 py-2 px-4">Producto</th>
+                        <th class="border border-gray-300 py-2 px-4">Precio</th>
+                        <th class="border border-gray-300 py-2 px-4">IVA</th>
+                        <th class="border border-gray-300 py-2 px-4">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for producto in productos %}
+                    <tr class="border border-gray-300">
+                        <td class="border border-gray-300 py-2 px-4">{{ producto.nombre }}</td>
+                        <td class="border border-gray-300 py-2 px-4">{{ producto.precio }}</td>
+                        <td class="border border-gray-300 py-2 px-4">{{ '%.2f' % producto.iva }}</td>
+                        <td class="border border-gray-300 py-2 px-4">{{ '%.2f' % producto.total }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
